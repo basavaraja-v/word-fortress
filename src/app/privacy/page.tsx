@@ -24,12 +24,12 @@ export default function Privacy() {
 
                         <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-300">Information We Collect</h2>
                         <p>
-                            Word Fortress does not collect any personally identifiable information. We only store a small piece of data in your browser's local storage to remember if you've visited the game before, which helps us provide a better first-time user experience.
+                            Word Fortress does not collect any personally identifiable information. We only store a small piece of data in your browser&apos;s local storage to remember if you&apos;ve visited the game before, which helps us provide a better first-time user experience.
                         </p>
 
                         <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-300">How We Use Your Information</h2>
                         <p>
-                            The information stored in your browser's local storage is used solely to enhance your gaming experience by determining whether to show the "How to Play" instructions on your first visit.
+                            The information stored in your browser&apos;s local storage is used solely to enhance your gaming experience by determining whether to show the &quot;How to Play&quot; instructions on your first visit.
                         </p>
 
                         <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-300">Data Security</h2>

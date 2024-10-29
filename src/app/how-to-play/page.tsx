@@ -50,7 +50,7 @@ export default function HowToPlay() {
                         </ul>
 
                         <p className="mt-4">
-                            Remember, practice makes perfect! The more you play, the better you'll become at recognizing word patterns and guessing efficiently. Enjoy building your Word Fortress!
+                            Remember, practice makes perfect! The more you play, the better you&apos;ll become at recognizing word patterns and guessing efficiently. Enjoy building your Word Fortress!
                         </p>
                     </CardContent>
                 </Card>

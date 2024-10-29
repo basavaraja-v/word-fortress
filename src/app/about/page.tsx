@@ -34,7 +34,7 @@ export default function About() {
                             <li>Responsive design for seamless play on any device</li>
                         </ul>
                         <p>
-                            Whether you're a word game enthusiast, a student looking to expand your vocabulary, or someone who enjoys a good mental challenge, Word Fortress offers an engaging and rewarding experience. Start playing today and see how high you can score while fortifying your word power!
+                            Whether you&apos;re a word game enthusiast, a student looking to expand your vocabulary, or someone who enjoys a good mental challenge, Word Fortress offers an engaging and rewarding experience. Start playing today and see how high you can score while fortifying your word power!
                         </p>
                     </CardContent>
                 </Card>
