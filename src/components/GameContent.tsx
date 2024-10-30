@@ -45,9 +45,9 @@ export default function GameContent({
                 ) : (
                     <>
                         <div className="text-center">
-                            <div className="text-4xl font-mono space-x-1">
+                            <div className="text-4xl font-mono space-x-0.5">
                                 {word.split('').map((char, index) => (
-                                    <span key={index} className="inline-block w-10 h-14 border-b-2 border-blue-500 dark:border-blue-300">
+                                    <span key={index} className="inline-block w-10 h-14 sm:w-8 sm:h-12 border-b-2 border-blue-500 dark:border-blue-300">
                                         {guessedLetters.has(char) ? (
                                             <span className="text-blue-700 dark:text-blue-200">{char}</span>
                                         ) : (
@@ -59,7 +59,7 @@ export default function GameContent({
                         </div>
                         <div className="flex flex-col space-y-2">
                             <div className="flex justify-center space-x-2">
-                                {Array.from({ length: word.length + (difficulty === 'easy' ? 4 : difficulty === 'medium' ? 2 : 1) }).map((_, i) => (
+                                {Array.from({ length: word.length + (difficulty === 'easy' ? 2 : difficulty === 'medium' ? 2 : 1) }).map((_, i) => (
                                     <div
                                         key={i}
                                         className={`w-8 h-8 rounded-sm transition-all duration-300 ${i < fortressHealth ? 'bg-blue-500 dark:bg-blue-400' : 'bg-red-500 dark:bg-red-400'
