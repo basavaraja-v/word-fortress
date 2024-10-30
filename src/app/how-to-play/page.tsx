@@ -25,13 +25,23 @@ export default function HowToPlay() {
 
                         <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-300">Gameplay Steps</h2>
                         <ol className="list-decimal list-inside space-y-2">
-                            <li>Choose a difficulty level: Easy (4-letter words), Medium (5-letter words), or Hard (6-letter words).</li>
-                            <li>The game starts with a hidden word and a full fortress (represented by shield icons).</li>
+                            <li>Choose a difficulty level: Easy, Medium, or Hard. This affects your time limit, number of free vowel guesses, and fortress health.</li>
+                            <li>The game starts with a hidden word (4-8 letters) and full fortress health.</li>
                             <li>Guess letters by clicking on the alphabet buttons.</li>
-                            <li>Correct guesses reveal the letter in the word and increase your score.</li>
-                            <li>Incorrect guesses damage your fortress (a shield icon turns red).</li>
-                            <li>Keep guessing until you reveal the entire word or your fortress falls.</li>
+                            <li>Correct guesses reveal the letter in the word, increase your score, and build fortress strength.</li>
+                            <li>Incorrect consonant guesses damage your fortress health.</li>
+                            <li>You have a limited number of free vowel guesses that don&apos;t damage your fortress.</li>
+                            <li>Use hints wisely - they reveal a letter but cost you 10 seconds of game time.</li>
+                            <li>Keep guessing until you reveal the entire word, your fortress falls, or time runs out.</li>
                         </ol>
+
+                        <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-300">Game Elements</h2>
+                        <ul className="list-disc list-inside space-y-2">
+                            <li>Fortress Health: Represents your remaining incorrect guesses. It&apos;s based on word length plus a difficulty modifier.</li>
+                            <li>Fortress Strength: Builds up with correct guesses, providing a visual of your progress.</li>
+                            <li>Free Vowels: The number of vowels you can guess without penalty, varies by difficulty.</li>
+                            <li>Timer: Shows the remaining time. It counts down faster on higher difficulties.</li>
+                        </ul>
 
                         <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-300">Scoring</h2>
                         <ul className="list-disc list-inside space-y-2">
@@ -43,14 +53,15 @@ export default function HowToPlay() {
 
                         <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-300">Tips</h2>
                         <ul className="list-disc list-inside space-y-2">
-                            <li>Start with common vowels and consonants.</li>
+                            <li>Use your free vowel guesses strategically.</li>
+                            <li>Consider using hints on longer or more difficult words.</li>
                             <li>Pay attention to word patterns and letter frequencies.</li>
-                            <li>Use the difficulty levels to challenge yourself as you improve.</li>
                             <li>Try to guess the word as quickly as possible for a higher score.</li>
+                            <li>Challenge yourself with harder difficulties as you improve.</li>
                         </ul>
 
                         <p className="mt-4">
-                            Remember, practice makes perfect! The more you play, the better you&apos;ll become at recognizing word patterns and guessing efficiently. Enjoy building your Word Fortress!
+                            Remember, practice makes perfect! The more you play, the better you&apos;ll become at recognizing word patterns and guessing efficiently. Enjoy building and defending your Word Fortress!
                         </p>
                     </CardContent>
                 </Card>
