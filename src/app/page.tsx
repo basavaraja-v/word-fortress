@@ -252,66 +252,71 @@ export default function WordFortress() {
                   </div>
                   {gameState === 'playing' && (
                     <>
-                      <div className="grid grid-rows-3 gap-4 justify-center">
-                        <div className="grid grid-cols-10 gap-4">
-                          {alphabet.slice(0, 10).map((letter) => {
-                            const status = getLetterStatus(letter)
-                            return (
-                              <Button
-                                key={letter}
-                                onClick={() => handleGuess(letter)}
-                                disabled={guessedLetters.has(letter)}
-                                className={`w-full h-12 sm:h-10 md:h-12 text-lg font-bold transition-all duration-300 ${status === 'correct'
-                                  ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
-                                  : status === 'incorrect'
-                                    ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
-                                    : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
-                                  }`}
-                              >
-                                {letter}
-                              </Button>
-                            )
-                          })}
-                        </div>
-                        <div className="grid grid-cols-10 gap-4 ml-12">
-                          {alphabet.slice(10, 19).map((letter) => {
-                            const status = getLetterStatus(letter)
-                            return (
-                              <Button
-                                key={letter}
-                                onClick={() => handleGuess(letter)}
-                                disabled={guessedLetters.has(letter)}
-                                className={`w-full h-12 sm:h-10 md:h-12 text-lg font-bold transition-all duration-300 ${status === 'correct'
-                                  ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
-                                  : status === 'incorrect'
-                                    ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
-                                    : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
-                                  }`}
-                              >
-                                {letter}
-                              </Button>
-                            )
-                          })}
-                        </div>
-                        <div className="grid grid-cols-10 gap-4 ml-24">
-                          {alphabet.slice(19).map((letter) => {
-                            const status = getLetterStatus(letter)
-                            return (
-                              <Button
-                                key={letter}
-                                onClick={() => handleGuess(letter)}
-                                disabled={guessedLetters.has(letter)}
-                                className={`w-full h-12 sm:h-10 md:h-12 text-lg font-bold transition-all duration-300 ${status === 'correct'
-                                  ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
-                                  : status === 'incorrect'
-                                    ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
-                                    : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
-                                  }`}
-                              >
-                                {letter}
-                              </Button>
-                            )
-                          })}
+                      <div className="w-full max-w-3xl mx-auto px-2 sm:px-4">
+                        <div className="grid grid-rows-3 gap-1.5 sm:gap-2 md:gap-4">
+                          {/* First row - QWERTYUIOP */}
+                          <div className="grid grid-cols-10 gap-1 sm:gap-2 md:gap-4 mx-auto w-full">
+                            {alphabet.slice(0, 10).map((letter) => {
+                              const status = getLetterStatus(letter)
+                              return (
+                                <Button
+                                  key={letter}
+                                  onClick={() => handleGuess(letter)}
+                                  disabled={guessedLetters.has(letter)}
+                                  className={`w-full h-8 sm:h-10 md:h-12 text-xs sm:text-sm md:text-lg font-bold transition-all duration-300 p-0 sm:p-2 ${status === 'correct'
+                                      ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
+                                      : status === 'incorrect'
+                                        ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
+                                        : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
+                                    }`}
+                                >
+                                  {letter}
+                                </Button>
+                              )
+                            })}
+                          </div>
+                          {/* Second row - ASDFGHJKL */}
+                          <div className="grid grid-cols-9 gap-1 sm:gap-2 md:gap-4 mx-auto w-[95%] sm:w-[90%]">
+                            {alphabet.slice(10, 19).map((letter) => {
+                              const status = getLetterStatus(letter)
+                              return (
+                                <Button
+                                  key={letter}
+                                  onClick={() => handleGuess(letter)}
+                                  disabled={guessedLetters.has(letter)}
+                                  className={`w-full h-8 sm:h-10 md:h-12 text-xs sm:text-sm md:text-lg font-bold transition-all duration-300 p-0 sm:p-2 ${status === 'correct'
+                                      ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
+                                      : status === 'incorrect'
+                                        ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
+                                        : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
+                                    }`}
+                                >
+                                  {letter}
+                                </Button>
+                              )
+                            })}
+                          </div>
+                          {/* Third row - ZXCVBNM */}
+                          <div className="grid grid-cols-7 gap-1 sm:gap-2 md:gap-4 mx-auto w-[85%] sm:w-[75%] md:w-[70%]">
+                            {alphabet.slice(19).map((letter) => {
+                              const status = getLetterStatus(letter)
+                              return (
+                                <Button
+                                  key={letter}
+                                  onClick={() => handleGuess(letter)}
+                                  disabled={guessedLetters.has(letter)}
+                                  className={`w-full h-8 sm:h-10 md:h-12 text-xs sm:text-sm md:text-lg font-bold transition-all duration-300 p-0 sm:p-2 ${status === 'correct'
+                                      ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
+                                      : status === 'incorrect'
+                                        ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
+                                        : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
+                                    }`}
+                                >
+                                  {letter}
+                                </Button>
+                              )
+                            })}
+                          </div>
                         </div>
                       </div>
                       <div className="flex justify-center">
