@@ -1,25 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from "@/components/ui/dialog"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { InfoIcon, TimerIcon, TrophyIcon, BookOpenIcon, ShieldIcon, LockIcon, HelpCircleIcon, PlayIcon } from 'lucide-react'
 import { toast, Toaster } from 'react-hot-toast'
-import { Progress } from "@/components/ui/progress"
-
-const getDifficultySettings = () => {
-  return {
-    easy: { timeLimit: 180, freeVowels: 5 },
-    medium: { timeLimit: 120, freeVowels: 4 },
-    hard: { timeLimit: 90, freeVowels: 3 }
-  }
-}
-
-const alphabet = 'QWERTYUIOPASDFGHJKLZXCVBNM'.split('')
-const vowels = ['A', 'E', 'I', 'O', 'U']
+import GameHeader from '@/components/GameHeader'
+import GameContent from '@/components/GameContent'
+import Footer from '@/components/Footer'
+import { getDifficultySettings, alphabet, vowels } from '../lib/utils'
+import { Card } from "@/components/ui/card"
 
 export default function WordFortress() {
   const [words, setWords] = useState<{ [key: number]: string[] }>({})
@@ -72,7 +59,6 @@ export default function WordFortress() {
   }, [gameState])
 
   useEffect(() => {
-    // Reinitialize the game when difficulty changes
     if (gameState !== 'idle') {
       startGame()
     }
@@ -142,7 +128,7 @@ export default function WordFortress() {
 
   const handleDifficultyChange = (value: 'easy' | 'medium' | 'hard') => {
     setDifficulty(value)
-    setDifficultySettings(getDifficultySettings()) // Reset difficulty settings
+    setDifficultySettings(getDifficultySettings())
   }
 
   return (
@@ -150,216 +136,32 @@ export default function WordFortress() {
       <Toaster position="top-center" />
       <div className="w-full flex-grow px-0 sm:px-4 sm:container sm:mx-auto">
         <Card className="w-full h-full sm:max-w-2xl sm:mx-auto bg-white dark:bg-gray-800 shadow-xl sm:my-4 rounded-none sm:rounded-xl">
-          <CardHeader className="px-4">
-            <div className="flex justify-between items-center">
-              <CardTitle className="text-3xl font-bold text-blue-600 dark:text-blue-300">Word Fortress</CardTitle>
-              <div className="flex items-center space-x-2">
-                <Dialog open={showHowToPlay} onOpenChange={setShowHowToPlay}>
-                  <DialogTrigger asChild>
-                    <Button variant="outline" size="icon">
-                      <InfoIcon className="h-5 w-5" />
-                      <span className="sr-only">How to play</span>
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>How to Play Word Fortress</DialogTitle>
-                    </DialogHeader>
-                    <div className="space-y-2">
-                      <p>1. Guess letters to reveal the hidden word (4-8 letters).</p>
-                      <p>2. Correct guesses build fortress strength and increase your score.</p>
-                      <p>3. Incorrect consonant guesses damage your fortress health.</p>
-                      <p>4. You have free vowel guesses that don&apos;t damage your fortress.</p>
-                      <p>5. Use hints to reveal letters, but it costs you 10 seconds.</p>
-                      <p>6. Win by guessing the word before time runs out or your fortress falls!</p>
-                      <p>7. Choose harder difficulties for more challenge and higher scores.</p>
-                    </div>
-                    <DialogClose asChild>
-                      <Button className="mt-4">Got it!</Button>
-                    </DialogClose>
-                  </DialogContent>
-                </Dialog>
-                <Select value={difficulty} onValueChange={handleDifficultyChange}>
-                  <SelectTrigger className="w-[120px]">
-                    <SelectValue placeholder="Difficulty" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="easy">Easy</SelectItem>
-                    <SelectItem value="medium">Medium</SelectItem>
-                    <SelectItem value="hard">Hard</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            <CardDescription className="flex justify-between items-center text-lg mt-4">
-              <span className="flex items-center">
-                <TrophyIcon className="mr-1 h-5 w-5" aria-hidden="true" />
-                Score: {score}
-              </span>
-              <span className="flex items-center">
-                <ShieldIcon className="mr-1 h-5 w-5" aria-hidden="true" />
-                Health: {fortressHealth}
-              </span>
-              <span className="flex items-center">
-                <TimerIcon className="mr-1 h-5 w-5" aria-hidden="true" />
-                Time: {timeLeft}s
-              </span>
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-6">
-              {gameState === 'idle' ? (
-                <div className="text-center">
-                  <Button onClick={startGame} className="bg-green-500 hover:bg-green-600 text-white text-lg px-8 py-4">
-                    <PlayIcon className="mr-2 h-6 w-6" />
-                    Play
-                  </Button>
-                </div>
-              ) : (
-                <>
-                  <div className="text-center">
-                    <div className="text-4xl font-mono space-x-1">
-                      {word.split('').map((char, index) => (
-                        <span key={index} className="inline-block w-10 h-14 border-b-2 border-blue-500 dark:border-blue-300">
-                          {guessedLetters.has(char) ? (
-                            <span className="text-blue-700 dark:text-blue-200">{char}</span>
-                          ) : (
-                            <span className="invisible">_</span>
-                          )}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="flex flex-col space-y-2">
-                    <div className="flex justify-center space-x-2">
-                      {Array.from({ length: word.length + (difficulty === 'easy' ? 4 : difficulty === 'medium' ? 2 : 1) }).map((_, i) => (
-                        <div
-                          key={i}
-                          className={`w-8 h-8 rounded-sm transition-all duration-300 ${i < fortressHealth ? 'bg-blue-500 dark:bg-blue-400' : 'bg-red-500 dark:bg-red-400'
-                            }`}
-                        >
-                          <ShieldIcon className="w-full h-full p-1 text-white" />
-                        </div>
-                      ))}
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span>Fortress Strength:</span>
-                      <span>{fortressStrength}%</span>
-                      <span>Free Vowels Left:</span>
-                      <span>{vowelsLeft}</span>
-                    </div>
-                    <Progress value={fortressStrength} className="w-full" />
-                  </div>
-                  {gameState === 'playing' && (
-                    <>
-                      <div className="w-full max-w-3xl mx-auto px-2 sm:px-4">
-                        <div className="grid grid-rows-3 gap-1.5 sm:gap-2 md:gap-4">
-                          {/* First row - QWERTYUIOP */}
-                          <div className="grid grid-cols-10 gap-1 sm:gap-2 md:gap-4 mx-auto w-full">
-                            {alphabet.slice(0, 10).map((letter) => {
-                              const status = getLetterStatus(letter)
-                              return (
-                                <Button
-                                  key={letter}
-                                  onClick={() => handleGuess(letter)}
-                                  disabled={guessedLetters.has(letter)}
-                                  className={`w-full h-8 sm:h-10 md:h-12 text-xs sm:text-sm md:text-lg font-bold transition-all duration-300 p-0 sm:p-2 ${status === 'correct'
-                                    ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
-                                    : status === 'incorrect'
-                                      ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
-                                      : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
-                                    }`}
-                                >
-                                  {letter}
-                                </Button>
-                              )
-                            })}
-                          </div>
-                          {/* Second row - ASDFGHJKL */}
-                          <div className="grid grid-cols-9 gap-1 sm:gap-2 md:gap-4 mx-auto w-[95%] sm:w-[90%]">
-                            {alphabet.slice(10, 19).map((letter) => {
-                              const status = getLetterStatus(letter)
-                              return (
-                                <Button
-                                  key={letter}
-                                  onClick={() => handleGuess(letter)}
-                                  disabled={guessedLetters.has(letter)}
-                                  className={`w-full h-8 sm:h-10 md:h-12 text-xs sm:text-sm md:text-lg font-bold transition-all duration-300 p-0 sm:p-2 ${status === 'correct'
-                                    ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
-                                    : status === 'incorrect'
-                                      ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
-                                      : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
-                                    }`}
-                                >
-                                  {letter}
-                                </Button>
-                              )
-                            })}
-                          </div>
-                          {/* Third row - ZXCVBNM */}
-                          <div className="grid grid-cols-7 gap-1 sm:gap-2 md:gap-4 mx-auto w-[85%] sm:w-[75%] md:w-[70%]">
-                            {alphabet.slice(19).map((letter) => {
-                              const status = getLetterStatus(letter)
-                              return (
-                                <Button
-                                  key={letter}
-                                  onClick={() => handleGuess(letter)}
-                                  disabled={guessedLetters.has(letter)}
-                                  className={`w-full h-8 sm:h-10 md:h-12 text-xs sm:text-sm md:text-lg font-bold transition-all duration-300 p-0 sm:p-2 ${status === 'correct'
-                                    ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
-                                    : status === 'incorrect'
-                                      ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
-                                      : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
-                                    }`}
-                                >
-                                  {letter}
-                                </Button>
-                              )
-                            })}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex justify-center">
-                        <Button onClick={getHint} className="bg-yellow-500 hover:bg-yellow-600 text-white">
-                          <HelpCircleIcon className="mr-2 h-4 w-4" />
-                          Get Hint (-10s)
-                        </Button>
-                      </div>
-                    </>
-                  )}
-                  {gameState !== 'playing' && (
-                    <div className="text-center space-y-4">
-                      <p className="text-3xl font-bold mb-2 animate-bounce">
-                        {gameState === 'won' ? '🎉 You won! 🎉' : '💔 Game Over 💔'}
-                      </p>
-                      <p className="text-xl">The word was: <span className="font-bold text-blue-600 dark:text-blue-300">{word}</span></p>
-                      <p className="text-2xl">Final Score: <span className="font-bold text-green-600 dark:text-green-400">{score}</span></p>
-                      <Button onClick={startGame} className="bg-blue-500  hover:bg-blue-600 text-white text-lg px-8 py-2">Play Again</Button>
-                    </div>
-                  )}
-                </>
-              )}
-            </div>
-          </CardContent>
+          <GameHeader
+            score={score}
+            fortressHealth={fortressHealth}
+            timeLeft={timeLeft}
+            difficulty={difficulty}
+            showHowToPlay={showHowToPlay}
+            setShowHowToPlay={setShowHowToPlay}
+            handleDifficultyChange={handleDifficultyChange}
+          />
+          <GameContent
+            gameState={gameState}
+            word={word}
+            guessedLetters={guessedLetters}
+            fortressHealth={fortressHealth}
+            fortressStrength={fortressStrength}
+            vowelsLeft={vowelsLeft}
+            difficulty={difficulty}
+            startGame={startGame}
+            handleGuess={handleGuess}
+            getLetterStatus={getLetterStatus}
+            getHint={getHint}
+            score={score}
+          />
         </Card>
       </div>
-
-      <footer className="mt-8">
-        <nav className="flex justify-center space-x-4">
-          <Link href="/about" className="text-blue-600 dark:text-blue-300 hover:underline">
-            <BookOpenIcon className="inline-block mr-1" />
-            About
-          </Link>
-          <Link href="/how-to-play" className="text-blue-600 dark:text-blue-300 hover:underline">
-            <InfoIcon className="inline-block mr-1" />
-            How to Play
-          </Link>
-          <Link href="/privacy" className="text-blue-600 dark:text-blue-300 hover:underline">
-            <LockIcon className="inline-block mr-1" />
-            Privacy
-          </Link>
-        </nav>
-      </footer>
+      <Footer />
     </div>
   )
 }
