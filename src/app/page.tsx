@@ -148,9 +148,9 @@ export default function WordFortress() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800">
       <Toaster position="top-center" />
-      <div className="container mx-auto flex-grow">
-        <Card className="w-full max-w-2xl mx-auto bg-white dark:bg-gray-800 shadow-xl">
-          <CardHeader>
+      <div className="w-full flex-grow px-0 sm:px-4 sm:container sm:mx-auto">
+        <Card className="w-full h-full sm:max-w-2xl sm:mx-auto bg-white dark:bg-gray-800 shadow-xl sm:my-4 rounded-none sm:rounded-xl">
+          <CardHeader className="px-4">
             <div className="flex justify-between items-center">
               <CardTitle className="text-3xl font-bold text-blue-600 dark:text-blue-300">Word Fortress</CardTitle>
               <div className="flex items-center space-x-2">
@@ -264,10 +264,10 @@ export default function WordFortress() {
                                   onClick={() => handleGuess(letter)}
                                   disabled={guessedLetters.has(letter)}
                                   className={`w-full h-8 sm:h-10 md:h-12 text-xs sm:text-sm md:text-lg font-bold transition-all duration-300 p-0 sm:p-2 ${status === 'correct'
-                                      ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
-                                      : status === 'incorrect'
-                                        ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
-                                        : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
+                                    ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
+                                    : status === 'incorrect'
+                                      ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
+                                      : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
                                     }`}
                                 >
                                   {letter}
@@ -285,10 +285,10 @@ export default function WordFortress() {
                                   onClick={() => handleGuess(letter)}
                                   disabled={guessedLetters.has(letter)}
                                   className={`w-full h-8 sm:h-10 md:h-12 text-xs sm:text-sm md:text-lg font-bold transition-all duration-300 p-0 sm:p-2 ${status === 'correct'
-                                      ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
-                                      : status === 'incorrect'
-                                        ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
-                                        : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
+                                    ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
+                                    : status === 'incorrect'
+                                      ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
+                                      : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
                                     }`}
                                 >
                                   {letter}
@@ -306,10 +306,10 @@ export default function WordFortress() {
                                   onClick={() => handleGuess(letter)}
                                   disabled={guessedLetters.has(letter)}
                                   className={`w-full h-8 sm:h-10 md:h-12 text-xs sm:text-sm md:text-lg font-bold transition-all duration-300 p-0 sm:p-2 ${status === 'correct'
-                                      ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
-                                      : status === 'incorrect'
-                                        ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
-                                        : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
+                                    ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
+                                    : status === 'incorrect'
+                                      ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
+                                      : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
                                     }`}
                                 >
                                   {letter}

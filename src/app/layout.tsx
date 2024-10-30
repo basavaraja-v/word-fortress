@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { Analytics } from "@vercel/analytics/next";
+import type { Metadata } from "next"
+import "./globals.css"
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: {
@@ -30,21 +30,19 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`antialiased`}
-      >
+      <body className="antialiased min-h-screen w-full m-0 p-0">
         {children}
         <Analytics />
       </body>
     </html>
-  );
+  )
 }
