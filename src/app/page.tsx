@@ -18,7 +18,7 @@ const getDifficultySettings = () => {
   }
 }
 
-const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+const alphabet = 'QWERTYUIOPASDFGHJKLZXCVBNM'.split('')
 const vowels = ['A', 'E', 'I', 'O', 'U']
 
 export default function WordFortress() {
@@ -146,7 +146,7 @@ export default function WordFortress() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 py-8 px-4">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800">
       <Toaster position="top-center" />
       <div className="container mx-auto flex-grow">
         <Card className="w-full max-w-2xl mx-auto bg-white dark:bg-gray-800 shadow-xl">
@@ -252,23 +252,67 @@ export default function WordFortress() {
                   </div>
                   {gameState === 'playing' && (
                     <>
-                      <div className="grid grid-cols-4 sm:grid-cols-7 md:grid-cols-9 gap-2">
-                        {alphabet.map((letter) => {
-                          const status = getLetterStatus(letter)
-                          return (
-                            <Button
-                              key={letter}
-                              onClick={() => handleGuess(letter)}
-                              disabled={guessedLetters.has(letter)}
-                              className={`w-full h-12 text-lg font-bold transition-all duration-300 ${status === 'correct' ? 'bg-green-500 hover:bg-green-600 text-white scale-105' :
-                                status === 'incorrect' ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50' :
-                                  'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
-                                }`}
-                            >
-                              {letter}
-                            </Button>
-                          )
-                        })}
+                      <div className="grid grid-rows-3 gap-4 justify-center">
+                        <div className="grid grid-cols-10 gap-4">
+                          {alphabet.slice(0, 10).map((letter) => {
+                            const status = getLetterStatus(letter)
+                            return (
+                              <Button
+                                key={letter}
+                                onClick={() => handleGuess(letter)}
+                                disabled={guessedLetters.has(letter)}
+                                className={`w-full h-12 sm:h-10 md:h-12 text-lg font-bold transition-all duration-300 ${status === 'correct'
+                                  ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
+                                  : status === 'incorrect'
+                                    ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
+                                    : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
+                                  }`}
+                              >
+                                {letter}
+                              </Button>
+                            )
+                          })}
+                        </div>
+                        <div className="grid grid-cols-10 gap-4 ml-12">
+                          {alphabet.slice(10, 19).map((letter) => {
+                            const status = getLetterStatus(letter)
+                            return (
+                              <Button
+                                key={letter}
+                                onClick={() => handleGuess(letter)}
+                                disabled={guessedLetters.has(letter)}
+                                className={`w-full h-12 sm:h-10 md:h-12 text-lg font-bold transition-all duration-300 ${status === 'correct'
+                                  ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
+                                  : status === 'incorrect'
+                                    ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
+                                    : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
+                                  }`}
+                              >
+                                {letter}
+                              </Button>
+                            )
+                          })}
+                        </div>
+                        <div className="grid grid-cols-10 gap-4 ml-24">
+                          {alphabet.slice(19).map((letter) => {
+                            const status = getLetterStatus(letter)
+                            return (
+                              <Button
+                                key={letter}
+                                onClick={() => handleGuess(letter)}
+                                disabled={guessedLetters.has(letter)}
+                                className={`w-full h-12 sm:h-10 md:h-12 text-lg font-bold transition-all duration-300 ${status === 'correct'
+                                  ? 'bg-green-500 hover:bg-green-600 text-white scale-105'
+                                  : status === 'incorrect'
+                                    ? 'bg-red-500 hover:bg-red-600 text-white scale-95 opacity-50'
+                                    : 'bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600'
+                                  }`}
+                              >
+                                {letter}
+                              </Button>
+                            )
+                          })}
+                        </div>
                       </div>
                       <div className="flex justify-center">
                         <Button onClick={getHint} className="bg-yellow-500 hover:bg-yellow-600 text-white">
